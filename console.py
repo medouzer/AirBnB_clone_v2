@@ -126,8 +126,6 @@ class HBNBCommand(cmd.Cmd):
         new_instance = HBNBCommand.classes[class_name]()
         for parm in range(1, len(params)):
             key, value = tuple(params[parm].split("="))
-            if key not in HBNBCommand.valid_keys[class_name]:
-                continue
             if len(value) >= 2 and value[0] == '"' and value[len(value) - 1] == '"':
                 value = value[1:-1]
                 value = value.replace("_", " ")
