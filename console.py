@@ -4,7 +4,7 @@ import cmd
 import sys
 import models
 from models.base_model import BaseModel
-from models.__init__ import storage
+from models import storage
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -138,8 +138,8 @@ class HBNBCommand(cmd.Cmd):
                         value = int(value)
                 except (SyntaxError, NameError):
                         continue
-                # if value is not None:
-            setattr(new_instance, key, value)
+                if value is not None:
+                    setattr(new_instance, key, value)
         new_instance.save()
         print(new_instance.id)
 

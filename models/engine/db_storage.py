@@ -2,7 +2,8 @@
 """New engine DBStorage"""
 from os import getenv
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.orm import scoped_session
+from sqlalchemy.orm.session import sessionmaker, Session
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -11,6 +12,9 @@ from models.amenity import Amenity
 from models.review import Review
 from models.base_model import Base
 
+classes = {'State': State, 'City': City,
+               'User': User, 'Place': Place,
+               'Review': Review, 'Amenity': Amenity}
 
 class DBStorage:
     """class DBStorage"""
@@ -36,33 +40,16 @@ class DBStorage:
         if hbnb_env == "test":
             Base.metadata.drop_all(self.__engine)
     
-    # def all(self, cls=None):
-    #     """query on the current database session"""
-    #     classes = {"Amenity": Amenity, "City": City,
-    #        "Place": Place, "Review": Review, "State": State, "User": User}
-    #     result = {}
-    #     for clas in classes:
-    #         if cls is None or cls is classes[clas] or cls is clas:
-    #             objects = self.__session.query(classes[clas]).all()
-    #             for obj in objects:
-    #                 key = obj.__class__.__name__ + '.' + obj.id
-    #                 result[key] = obj
-    #     return (result)
-    
     def all(self, cls=None):
-        """Query on the current database session"""
-        classes = {"Amenity": Amenity, "City": City,
-                "Place": Place, "Review": Review, "State": State, "User": User}
+        """query on the current database session"""
         result = {}
-
-        for class_name, class_type in classes.items():
-            if cls is None or cls is class_type or cls is class_name:
-                objects = self.__session.query(class_type).all()
+        for clas in classes:
+            if cls is None or cls is classes[clas] or cls is clas:
+                objects = self.__session.query(classes[clas]).all()
                 for obj in objects:
-                    key = f"{class_name}.{obj.id}"
+                    key = obj.__class__.__name__ + '.' + obj.id
                     result[key] = obj
-
-        return result
+        return (result)
     
     def new(self, obj):
         """add the object to the current database session"""
@@ -84,3 +71,7 @@ class DBStorage:
         session_to_scop = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_to_scop)
         self.__session = Session
+    
+    def close(self):
+        """close session"""
+        self.__session.close()
