@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ City Module for HBNB project """
 from models.base_model import BaseModel, Base
 from os import getenv
@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 
 t_storage = getenv("HBNB_TYPE_STORAGE")
 
-class City(BaseModel):
+class City(BaseModel, Base):
     """ The city class, contains state ID and name """
     __tablename__ = "cities"
     if t_storage == "db":

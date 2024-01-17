@@ -1,4 +1,4 @@
-#!/bin/usr/python3
+#!/bin/usr/env python3
 """New engine DBStorage"""
 from os import getenv
 from sqlalchemy import create_engine
@@ -36,23 +36,38 @@ class DBStorage:
         if hbnb_env == "test":
             Base.metadata.drop_all(self.__engine)
     
+    # def all(self, cls=None):
+    #     """query on the current database session"""
+    #     classes = {"Amenity": Amenity, "City": City,
+    #        "Place": Place, "Review": Review, "State": State, "User": User}
+    #     result = {}
+    #     for clas in classes:
+    #         if cls is None or cls is classes[clas] or cls is clas:
+    #             objects = self.__session.query(classes[clas]).all()
+    #             for obj in objects:
+    #                 key = obj.__class__.__name__ + '.' + obj.id
+    #                 result[key] = obj
+    #     return (result)
+    
     def all(self, cls=None):
-        """query on the current database session"""
+        """Query on the current database session"""
         classes = {"Amenity": Amenity, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+                "Place": Place, "Review": Review, "State": State, "User": User}
         result = {}
-        for clss in classes:
-            if cls is None or cls is classes[clss] or cls is clss:
-                objs = self.__session.query(classes[clss]).all()
-                for obj in objs:
-                    key = obj.__class__.__name__ + '.' + obj.id
+
+        for class_name, class_type in classes.items():
+            if cls is None or cls is class_type or cls is class_name:
+                objects = self.__session.query(class_type).all()
+                for obj in objects:
+                    key = f"{class_name}.{obj.id}"
                     result[key] = obj
-        return (result)
+
+        return result
     
     def new(self, obj):
         """add the object to the current database session"""
-        if obj:
-            self.__session.add(obj)
+        # if obj:
+        self.__session.add(obj)
 
     def save(self):
         """commit all changes of the current database session"""

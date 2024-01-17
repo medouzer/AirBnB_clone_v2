@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ State Module for HBNB project """
 from models.base_model import BaseModel, Base
 from os import getenv
@@ -8,7 +8,7 @@ from models.city import City
 
 t_storage = getenv("HBNB_TYPE_STORAGE")
 
-class State(BaseModel):
+class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
     if t_storage == "db":
