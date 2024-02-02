@@ -12,7 +12,7 @@ def do_pack():
 
     now = datetime.utcnow()
     date_time = now.strftime("%Y%m%d%H%M%S")
-    path_arch = "versions/{}".format(date_time)
+    path_arch = "versions/web_static_{}.tgz".format(date_time)
     archive = local("tar -cvzf {} web_static".format(path_arch))
 
     if archive.succeeded:
