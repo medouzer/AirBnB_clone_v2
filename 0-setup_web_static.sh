@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #Prepare your web servers
 
-sudo apt update
-sudo apt install ngnix
+sudo apt-get update
+sudo apt-get -y install ngnix
 
 sudo mkdir -p /data/
 sudo mkdir -p /data/web_static/
