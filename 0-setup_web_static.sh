@@ -2,7 +2,7 @@
 #Prepare your web servers
 
 sudo apt-get update
-sudo apt-get -y install ngnix
+sudo apt-get -y install nginx
 
 sudo mkdir -p /data/
 sudo mkdir -p /data/web_static/
