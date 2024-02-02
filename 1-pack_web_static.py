@@ -16,6 +16,6 @@ def do_pack():
     archive = local("tar -cvzf {} web_static".format(path_arch))
 
     if archive.succeeded:
-        return archive_path
+        return path_arch
     else:
         return None
