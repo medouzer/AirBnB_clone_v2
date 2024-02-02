@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/python3
 """Deploy archive!"""
 from fabric.api import *
 from os.path import exists
