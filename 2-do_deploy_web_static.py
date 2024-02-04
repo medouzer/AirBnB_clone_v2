@@ -8,6 +8,7 @@ env.hosts = ['54.152.181.77', '100.25.220.209']
 
 
 def do_deploy(archive_path):
+    """do_deploy class"""
     if not exists(archive_path):
         return False
     file_arch = archive_path.split('/')[-1]
