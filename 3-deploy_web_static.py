@@ -9,6 +9,7 @@ from os.path import exists
 env.hosts = ['54.152.181.77', '100.25.220.209']
 
 
+@runs_once
 def do_pack():
     """do pack"""
     if not os.path.exists("versions"):
@@ -25,6 +26,7 @@ def do_pack():
         return None
 
 
+@task
 def do_deploy(archive_path):
     """do_deploy method"""
     if not exists(archive_path):
@@ -45,6 +47,7 @@ def do_deploy(archive_path):
     return True
 
 
+@task
 def deploy():
     """ deploy method"""
     path = do_pack()
