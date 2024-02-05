@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """Compress before sending"""
-from fabric.api import local
+from fabric.api import *
 from datetime import datetime
 import os
+from os.path import exists
 
 
 env.hosts = ['54.152.181.77', '100.25.220.209']
