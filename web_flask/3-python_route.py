@@ -18,7 +18,7 @@ def c_dir(text):
     return 'C {}'.format(text.replace("_", " "))
 
 @app.route('/python/<text>', strict_slashes=False)
-def c_dir(text):
+def python_dir(text):
     if (text):
         return 'Python {}'.format(text.replace("_", " "))
     else:
