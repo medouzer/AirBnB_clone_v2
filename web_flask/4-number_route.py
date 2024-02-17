@@ -30,7 +30,7 @@ def python_dir(text=""):
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
-def c_dir(n):
+def number_dir(n):
     return "{} is a number".format(n)
 
 
