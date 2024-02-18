@@ -13,7 +13,7 @@ def List_states():
     return render_template('7-states_list.html', states=states)
 
 
-@app.teardown_appcontext()
+@app.teardown_appcontext
 def close(error):
     storage.close()
 
