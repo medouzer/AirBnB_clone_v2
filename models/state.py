@@ -16,13 +16,12 @@ class State(BaseModel, Base):
         name = Column(String(128), nullable=False)
         cities = relationship('City', cascade="all,delete", backref="state")
     else:
-        name = ""
         @property
         def cities(self):
             """getter attribute"""
             my_cities = []
-            citiesAll = models.storage.all(City)
-            for city in citiesAll.values():
+            list_of_cities = list(models.storage.all(City).values())
+            for city in list_of_cities:
                 if city.state_id == self.id:
                     my_cities.append(city)
             return my_cities
