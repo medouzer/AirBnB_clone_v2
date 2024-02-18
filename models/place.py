@@ -17,7 +17,7 @@ place_amenity = Table('place_amenity', Base.metadata,
                              ForeignKey('amenities.id'),
                              primary_key=True, nullable=False))
 
-class Place(BaseModel):
+class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = "places"
     city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
