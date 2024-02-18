@@ -12,15 +12,17 @@ t_storage = getenv("HBNB_TYPE_STORAGE")
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
-    name = Column(String(128), nullable=False)
-    cities = relationship('City', cascade="all,delete", backref="state")
-    if t_storage != "db":
+    if t_storage == "db":
+        name = Column(String(128), nullable=False)
+        cities = relationship('City', cascade="all,delete", backref="state")
+    else:
+        name = ""
         @property
         def cities(self):
             """getter attribute"""
             my_cities = []
-            list_of_cities = list(models.storage.all(City).values())
-            for city in list_of_cities:
+            citiesAll = models.storage.all(City)
+            for city in citiesAll.values():
                 if city.state_id == self.id:
                     my_cities.append(city)
             return my_cities
