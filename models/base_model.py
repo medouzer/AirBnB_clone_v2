@@ -36,8 +36,8 @@ class BaseModel:
                 if key == "updated_at":
                     value = datetime.datetime.strptime(value,
                                                      '%Y-%m-%dT%H:%M:%S.%f')
-            del kwargs['__class__']
-            self.__dict__.update(kwargs)
+                if key != "__class__":
+                    self.__dict__[key] = value
 
     def __str__(self):
         """Returns a string representation of the instance"""
