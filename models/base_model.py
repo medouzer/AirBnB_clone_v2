@@ -32,10 +32,10 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == "created_at":
                     value = datetime.datetime.strptime(value,
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
+                                                       '%Y-%m-%dT%H:%M:%S.%f')
                 if key == "updated_at":
                     value = datetime.datetime.strptime(value,
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
+                                                       '%Y-%m-%dT%H:%M:%S.%f')
                 if key != "__class__":
                     self.__dict__[key] = value
 
