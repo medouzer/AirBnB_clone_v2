@@ -1,4 +1,4 @@
-#!/bin/usr/python3
+#!/usr/bin/python3
 """New engine DBStorage"""
 from os import getenv
 from sqlalchemy import create_engine
