@@ -13,8 +13,9 @@ from models.review import Review
 from models.base_model import Base
 
 classes = {'State': State, 'City': City,
-               'User': User, 'Place': Place,
-               'Review': Review, 'Amenity': Amenity}
+           'User': User, 'Place': Place,
+           'Review': Review, 'Amenity': Amenity}
+
 
 class DBStorage:
     """class DBStorage"""
@@ -33,13 +34,11 @@ class DBStorage:
                                       format(hbnb_user,
                                              hbnb_pwd,
                                              hbnb_host,
-                                             hbnb_db),
-            pool_pre_ping=True,
-        )
+                                             hbnb_db), pool_pre_ping=True,)
 
         if hbnb_env == "test":
             Base.metadata.drop_all(self.__engine)
-    
+
     def all(self, cls=None):
         """query on the current database session"""
         result = {}
@@ -50,7 +49,7 @@ class DBStorage:
                     key = obj.__class__.__name__ + '.' + obj.id
                     result[key] = obj
         return (result)
-    
+
     def new(self, obj):
         """add the object to the current database session"""
         # if obj:
@@ -64,13 +63,14 @@ class DBStorage:
         """delete from the current database session"""
         if obj is not None:
             self.__session.delete(obj)
-        
+
     def reload(self):
         """reload data"""
         Base.metadata.create_all(self.__engine)
-        session_to_scop = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session_to_scop = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
         self.__session = scoped_session(session_to_scop)
-    
+
     def close(self):
         """close session"""
         self.__session.close()
