@@ -9,6 +9,7 @@ import models
 
 t_storage = getenv("HBNB_TYPE_STORAGE")
 
+
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
